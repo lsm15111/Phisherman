@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Phisherman</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="images/icons/phishing.ico" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/select2/select2.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/util.css" />
+    <link rel="stylesheet" type="text/css" href="css/main1.css" />
+    <style>
+      .donut {
+        width: 160px;
+        padding-bottom: 160px;
+        margin: 0 auto;
+        border-radius: 50%;
+        position: relative;
+        text-align: center;
+      }
+
+      .donut::before {
+        color: #fff;
+        width: 67%;
+        height: 67%;
+        background: #264057;
+        border-radius: 50%;
+        position: absolute;
+        left: 15%;
+        top: 15%;
+        bottom: 15%;
+        right: 15%;
+        display: block;
+        content: attr(data-percent) '%';
+        transform: skew(-0.03deg);
+        margin: auto;
+        font-weight: 800;
+        font-size: medium;
+        padding: calc(38% - 1.3vw) 0;
+      }
+      .donut-container {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="http://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+    <div class="wrapper">
+      <ul>
+        <div class="cc">
+          <li class="nn">
+            <a href="https://kiu.ac.kr"
+              ><img src="images/icons/kiu12.png" alt="LOGO" height="30px"
+            /></a>
+          </li>
+          <li class="bb"><a href="index.html">SW 인재양성 프로젝트</a></li>
+          <li class="mbc dropdown">
+            <a href="#">Contact</a>
+            <ul class="dropdown-menu hoool">
+              <li>최진용</li>
+              <li>박민호</li>
+              <li>윤준호</li>
+              <li>이성민</li>
+              <li>이창표</li>
+              <li>부석준</li>
+            </ul>
+          </li>
+        </div>
+      </ul>
+      <h2 id="title">Creative Digital Agency</h2>
+      <p id="sub">lorem ipsum dolor sit am</p>
+      <div class="wsize1 m-lr-auto">
+        <p class="txt-center l1-txt1 p-b-60"></p>
+        <p id="per"></p>
+        <div class="donut-container">
+          <div class="donut"></div>
+        </div>
+
+        <p class="txt-center s1-txt1 p-t-5">Thank you for visit our website!</p>
+      </div>
+    </div>
+    <div class="objects">
+      <ul class="box">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+    <script>
+      const donut = document.getElementsByClassName('donut')[0];
+
+      $('#per').load('output.txt', function (data) {
+        var lines = data.split('\n');
+        benign = lines[0] * 100;
+        phishing = lines[1] * 100;
+        benign = benign.toFixed(2);
+        phishing = phishing.toFixed(2);
+
+        $('#per').html(
+          'Benign: ' + benign + '%' + '<br/>' + 'Phishing: ' + phishing + '%'
+        );
+        if (benign > phishing) {
+          $('#title').html(
+            'This website is <span class="l1-txt2">Benign!</span>'
+          );
+          $('#sub').html('You can click on that site!');
+        } else {
+          $('#title').html(
+            'This website is <span class="l1-txt2">Phishing!</span>'
+          );
+          $('#sub').html('Do not click on that site!');
+        }
+
+        let totalMinwon = phishing,
+          resolveMinwon = benign; // 여기에 결과값 입력.
+
+        let t = 0;
+        const donutAnimation = setInterval(() => {
+          donut.dataset.percent = t;
+          donut.style.background = `conic-gradient(#f6587d 0 ${t}%, #4F98FF ${t}% 100% )`;
+          t++ >= totalMinwon && clearInterval(donutAnimation);
+        }, 10);
+        const repeat = setInterval(() => {
+          donutAnimation;
+        });
+      });
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/countdowntime/moment.min.js"></script>
+    <script src="vendor/countdowntime/moment-timezone.min.js"></script>
+    <script src="vendor/countdowntime/moment-timezone-with-data.min.js"></script>
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <script src="vendor/tilt/tilt.jquery.min.js"></script>
+  </body>
+</html>
